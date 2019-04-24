@@ -203,7 +203,8 @@ report-$(conf): errors-$(conf)
 
 doreport: experr-$(conf)
 	rm -f report-$(conf)
-	-diff experr-$(conf) errors-$(conf) > report-$(conf) 2>&1
+	cp errors-$(conf) report-$(conf)
+#	-diff experr-$(conf) errors-$(conf) > report-$(conf) 2>&1
 
 maybe-doreport:
 	-if [ -f errors-$(conf) ] ; then\
@@ -218,8 +219,8 @@ doerrors:
 	-(cd $(objdir); grep '^Error' $(objname)) > errors-$(conf)
 	-(cd $(objdir); grep '^Bug' $(objname)) >> errors-$(conf)
 	-(cd $(objdir); grep '^Warning' $(objname)) >> errors-$(conf)
-	-(cd $(objdir); grep '^Expected' $(objname))\
-         >> errors-$(conf)
+#	-(cd $(objdir); grep '^Expected' $(objname))\
+#         >> errors-$(conf)
 
 fastreport:
 	$(MAKE) doerrors
