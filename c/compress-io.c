@@ -209,10 +209,6 @@ int glzclose(glzFile file) {
       int r = WIN32_IZE(close)(lz4->fd);
       if (r == 0)
         break;
-#ifdef EINTR
-      else if (r == EINTR)
-        r = 0;
-#endif
       else
         return r;
     }
@@ -224,10 +220,6 @@ int glzclose(glzFile file) {
       int r = WIN32_IZE(close)(lz4->fd);
       if (r == 0)
         break;
-#ifdef EINTR
-      else if (r == EINTR)
-        r = 0;
-#endif
       else
         return r;
     }
