@@ -140,10 +140,6 @@ glzFile glzdopen(int fd, const char *mode) {
         break;
       else if (r > 0)
         pos += r;
-#ifdef EINTR
-      else if (r == EINTR)
-        r = 0;
-#endif
       else
         break; /* error reading */
     }
