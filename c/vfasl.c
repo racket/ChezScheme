@@ -277,8 +277,7 @@ ptr S_vfasl(ptr bv, void *stream, iptr offset, iptr input_len)
   if (data) {
     for (s = 0; s < vspaces_count; s++)
       vspaces[s] = ptr_add(data, vspace_offsets[s]);
-  } else
-    data = vspaces[0];
+  }
 
   symrefs = table;
   rtdrefs = ptr_add(symrefs, header.symref_count * sizeof(vfoff));

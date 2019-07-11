@@ -383,9 +383,6 @@ ptr S_close_fd(ptr file, IBOOL gzflag) {
  /* refuse to close stdin, stdout, and stderr fds */
   if (!gzflag && fd <= 2) return Strue;
 
- /* file is not locked; do not reference after deactivating thread! */
-  file = (ptr)-1;
-
  /* NOTE: close automatically releases locks so we don't to call unlock*/
   DEACTIVATE(tc)
   if (!gzflag) {
@@ -424,8 +421,6 @@ ptr S_bytevector_read(ptr file, ptr bv, iptr start, iptr count, IBOOL gzflag) {
   INT fd = gzflag ? 0 : GET_FD(file);
   glzFile gzfile = gzflag ? GZXFILE_GZFILE(file) : NULL;
 
- /* file is not locked; do not reference after deactivating thread! */
-  file = (ptr)-1;
 
 #if (iptr_bits > 32)
   if ((WIN32 || gzflag) && (unsigned int)count != count) count = 0xffffffff;
@@ -841,8 +836,6 @@ ptr S_bytevector_compress(ptr dest_bv, iptr d_start, iptr d_count,
 
         if (!is_valid_lz4_length(s_count))
           return Sstring("source bytevector ~s is too large");
-
-        destLen = (int)d_count;
 
         destLen = LZ4_compress_default((char *)&BVIT(src_bv, s_start), (char *)&BVIT(dest_bv, d_start), (int)s_count, (int)d_count);
 
