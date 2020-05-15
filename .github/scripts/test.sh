@@ -1,9 +1,7 @@
 #!/bin/bash
 runmats() {
-  echo travis_fold:start:mats
   echo make allxhelp "$@"
   make -C ${TARGET_MACHINE}/mats allxhelp "$@" 2>&1 | tee -a Make.out | grep '^matting '
-  echo travis_fold:end:mats
 }
 
 # Split these out so that we get output every 10 minutes on Windows builds.
