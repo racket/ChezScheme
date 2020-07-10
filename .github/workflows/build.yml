@@ -44,3 +44,47 @@ jobs:
         run: .github/scripts/build.sh
       - name: Test Chez
         run: .github/scripts/test.sh
+
+  build-arm64:
+    runs-on: [self-hosted, ARM64, Linux]
+    container: racket/racket-ci:latest
+    
+    env:
+      MACH: tarm64le
+
+    steps:
+      - name: Checkout Racket
+        uses: actions/checkout@v2
+        with:
+          repository: racket/racket
+          fetch-depth: 100
+      - name: Configuring Racket CGC
+        working-directory: racket/racket/src
+        run: >
+          ./configure
+          --prefix=/usr
+          --enable-cgcdefault
+          --disable-docs
+      - name: Building Racket CGC
+        working-directory: racket/racket/src
+        run: |
+          export cpus=$(nproc)
+          make -l $cpus -j $((cpus+1))
+      - name: Installing Racket CGC
+        working-directory: racket/racket/src
+        run: make -j  $((cpus+1)) install
+      - name: Install cs-bootstrap
+        run: raco pkg install --auto cs-bootstrap
+      - name: Checkout ChezScheme
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+          fetch-depth: 100
+      - name: Build bootfiles
+        run: racket -l cs-bootstrap
+      - name: Build Chez
+        run: |
+          ./configure -m=$MACH
+          make -j5 -l4
+      - name: Test Chez
+        run: .github/scripts/test.sh
