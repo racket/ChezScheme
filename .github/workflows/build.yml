@@ -45,12 +45,12 @@ jobs:
       - name: Test Chez
         run: .github/scripts/test.sh
 
-  build-arm64:
-    runs-on: [self-hosted, ARM64, Linux]
+  build-arm32:
+    runs-on: [self-hosted, ARM, Linux]
     container: racket/racket-ci:latest
     
     env:
-      MACH: tarm64le
+      MACH: tarm32le
       
     steps:
       - name: Create Racket Temp Directory
@@ -77,6 +77,6 @@ jobs:
       - name: Build Chez
         run: |
           ./configure -m=$MACH
-          make -j5 -l4
+          make -j$((cpus+1)) -l$((cpus))
       - name: Test Chez
         run: .github/scripts/test.sh
