@@ -59,6 +59,7 @@ jobs:
         working-directory: /tmp/racket
         run: |
           git clone --depth=1 https://github.com/racket/racket
+          cd racket/racket/src
           ./configure --prefix=/usr --enable-cgcdefault --disable-docs
           export cpus=$(nproc)
           make -l $cpus -j $((cpus+1))
