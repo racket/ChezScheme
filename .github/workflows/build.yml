@@ -51,35 +51,21 @@ jobs:
     
     env:
       MACH: tarm64le
-
+      
     steps:
-      - name: Checkout Racket
-        uses: actions/checkout@v2
-        with:
-          repository: racket/racket
-          path: racket
-          fetch-depth: 100
-      - name: tree
+      - name: Create Racket Temp Directory
+        run: mkdir /tmp/racket
+      - name: Build Racket CGC
+        working-directory: /tmp/racket
         run: |
-          pwd
-          find . -type f
-      - name: Configuring Racket CGC
-        working-directory: racket/racket/src
-        run: >
-          ./configure
-          --prefix=/usr
-          --enable-cgcdefault
-          --disable-docs
-      - name: Building Racket CGC
-        working-directory: racket/racket/src
-        run: |
+          git clone --depth=1 https://github.com/racket/racket
+          ./configure --prefix=/usr --enable-cgcdefault --disable-docs
           export cpus=$(nproc)
           make -l $cpus -j $((cpus+1))
-      - name: Installing Racket CGC
-        working-directory: racket/racket/src
-        run: make -j  $((cpus+1)) install
-      - name: Install cs-bootstrap
-        run: raco pkg install --auto cs-bootstrap
+          make -j  $((cpus+1)) install
+          cd
+          rm -Rf /tmp/racket
+          raco pkg install --auto cs-bootstrap
       - name: Checkout ChezScheme
         uses: actions/checkout@v2
         with:
