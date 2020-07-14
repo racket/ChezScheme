@@ -30,7 +30,7 @@ additional tag word to further refine the pointer-tag type.
 
 See also:
 
-    *Don't Stop the BiBOP: Flexible and Efficient Storage Management for Dynamically Typed Languages.* by R. Kent Dybvig, David Eby, and Carl Bruggeman, Indiana University TR #400, 1994.
+> *Don't Stop the BiBOP: Flexible and Efficient Storage Management for Dynamically Typed Languages.* by R. Kent Dybvig, David Eby, and Carl Bruggeman, Indiana University TR #400, 1994.
 
 For example, if "cmacro.ss" says
 
@@ -98,13 +98,8 @@ and continuation operations are handled as needed at the boundaries.
 
 See also:
  
- Representing Control in the Presence of First-Class Continuations.
- Robert Hieb, R. Kent Dybvig, and Carl Bruggeman.
- Programming Language Design and Implementation, 1990.
-
- Compiler and Runtime Support for Continuation Marks.
- Matthew Flatt and R. Kent Dybvig.
- Programming Language Design and Implementation, 2020.
+> *Representing Control in the Presence of First-Class Continuations* by Robert Hieb, R. Kent Dybvig, and Carl Bruggeman, Programming Language Design and Implementation, 1990.
+> *Compiler and Runtime Support for Continuation Marks* by Matthew Flatt and R. Kent Dybvig, Programming Language Design and Implementation, 2020.
 
 To the degree that the runtime system needs global state, that state
 is in the thread context (so, it's thread-local), which we'll
@@ -222,9 +217,8 @@ Compilation
 
 See also:
 
-    *Nanopass compiler infrastructure.* by Dipanwita Sarkar, Indiana University PhD dissertation, 2008
-    
-    *A Nanopass Framework for Commercial Compiler Development* by Andrew W. Keep, Indiana University PhD dissertation, 2013
+> *Nanopass compiler infrastructure* by Dipanwita Sarkar, Indiana University PhD dissertation, 2008
+> *A Nanopass Framework for Commercial Compiler Development* by Andrew W. Keep, Indiana University PhD dissertation, 2013
 
 Note that the core macro expander always converts its input to the
 `Lsrc` intermediate form. That intermediate form can be converted back
