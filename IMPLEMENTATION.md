@@ -30,14 +30,13 @@ additional tag word to further refine the pointer-tag type.
 
 See also:
 
-  Don't Stop the BiBOP: Flexible and Efficient Storage Management for
-  Dynamically Typed Languages.
-  R. Kent Dybvig, David Eby, and Carl Bruggeman.
-  Indiana University TR #400, 1994.
+    *Don't Stop the BiBOP: Flexible and Efficient Storage Management for Dynamically Typed Languages.* by R. Kent Dybvig, David Eby, and Carl Bruggeman, Indiana University TR #400, 1994.
 
 For example, if "cmacro.ss" says
 
+```scheme
   (define-constant type-pair         #b001)
+```
 
 then that means an address with only the lowest bit set among the low
 three bits refers to a pair. To get the address where the pair content
@@ -48,7 +47,9 @@ form of every pair pointer will end in "9".
 
 The `type-typed-object` type,
 
+```scheme
  (define-constant type-typed-object #b111)
+```
 
 refers to an object whose first word indicates its type. In the case
 of a Scheme record, that first word will be a record-type descriptor
@@ -126,6 +127,7 @@ The Scheme stack grows up, and SFP points to the beginning (i.e., the
 low address) of the current stack frame. The first word of a stack
 frame is the return address, so a frame looks like this:
 
+```scheme
                 ^
                 |          (higher addresses)
               future
@@ -143,6 +145,7 @@ frame is the return address, so a frame looks like this:
               frames 
                 |          (lower addresses)
                 v
+```
 
 On entry to a Scheme function, a check ensures that the difference
 between SFP and the end of the current stack segment is big enough to
@@ -219,13 +222,9 @@ Compilation
 
 See also:
 
-   Nanopass compiler infrastructure.
-   Dipanwita Sarkar.
-   Indiana University PhD dissertation, 2008
-
-   A Nanopass Framework for Commercial Compiler Development.
-   Andrew W. Keep.
-   Indiana University PhD dissertation, 2013
+    *Nanopass compiler infrastructure.* by Dipanwita Sarkar, Indiana University PhD dissertation, 2008
+    
+    *A Nanopass Framework for Commercial Compiler Development* by Andrew W. Keep, Indiana University PhD dissertation, 2013
 
 Note that the core macro expander always converts its input to the
 `Lsrc` intermediate form. That intermediate form can be converted back
