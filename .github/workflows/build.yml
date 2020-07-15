@@ -66,7 +66,7 @@ jobs:
           make -j  $((cpus+1)) install
           cd
           rm -Rf /tmp/racket
-          raco pkg install --auto cs-bootstrap
+          raco pkg install -i --auto --skip-installed cs-bootstrap
       - name: Checkout ChezScheme
         uses: actions/checkout@v2
         with:
