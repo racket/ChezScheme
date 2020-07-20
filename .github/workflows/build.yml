@@ -47,7 +47,9 @@ jobs:
 
   build-arm64:
     runs-on: [self-hosted, ARM64, Linux]
-    container: racket/racket-ci:latest
+    container:
+      image: racket/racket-ci:latest
+      options: --init
     
     env:
       MACH: tarm64le
